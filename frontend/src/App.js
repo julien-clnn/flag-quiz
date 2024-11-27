@@ -5,12 +5,13 @@ import './App.css';
 function App() {
   const [currentFlag, setCurrentFlag] = useState(null);
   const [userGuess, setUserGuess] = useState('');
-  const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [allCountries, setAllCountries] = useState([]);
-  // Track current suggestions and index
   const [currentSuggestions, setCurrentSuggestions] = useState([]);
   const [suggestionIndex, setSuggestionIndex] = useState(0);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [regions, setRegions] = useState([]);
+  const [selectedRegion, setSelectedRegion] = useState('all');
 
   const API_BASE_URL = 'http://127.0.0.1:5000';
 
@@ -26,7 +27,8 @@ function App() {
   const fetchNewFlag = async () => {
     try {
       setLoading(true);
-      const response = await axios.get(`${API_BASE_URL}/flag`);
+      const endpoint = selectedRegion === 'all' ? '/flag' : `/flag/${selectedRegion}`;
+      const response = await axios.get(`${API_BASE_URL}${endpoint}`);
       const flagData = {
         ...response.data,
         flag_url: `${API_BASE_URL}/flags/${response.data.flag_path}`
@@ -39,21 +41,14 @@ function App() {
     }
   };
 
-  useEffect(() => {
-    fetchNewFlag();
-    fetchAllCountries();
-  }, []);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     if (userGuess.toLowerCase() === currentFlag?.name.toLowerCase()) {
-      setScore(prevScore => prevScore + 1);
       setUserGuess('');
       fetchNewFlag();
     } else {
       setUserGuess('');
     }
-    // Reset suggestions state
     setCurrentSuggestions([]);
     setSuggestionIndex(0);
   };
@@ -61,72 +56,110 @@ function App() {
   const handleKeyDown = (e) => {
     if (e.key === 'Tab') {
       e.preventDefault();
-      
       if (userGuess) {
-        // If we don't have current suggestions, get them
         if (currentSuggestions.length === 0) {
           const matches = allCountries
             .filter(country => country.toLowerCase().startsWith(userGuess.toLowerCase()))
-            .sort(); // Sort alphabetically
-          
+            .sort();
           if (matches.length > 0) {
             setCurrentSuggestions(matches);
-            setUserGuess(matches[0]); // Set first match
+            setUserGuess(matches[0]);
           }
-        }
-        // If we already have suggestions, cycle through them
-        else {
+        } else {
           const nextIndex = (suggestionIndex + 1) % currentSuggestions.length;
           setSuggestionIndex(nextIndex);
           setUserGuess(currentSuggestions[nextIndex]);
         }
       }
     } else if (e.key !== 'Tab') {
-      // Reset suggestions if any other key is pressed
       setCurrentSuggestions([]);
       setSuggestionIndex(0);
     }
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const regionsResponse = await axios.get(`${API_BASE_URL}/regions`);
+        setRegions(regionsResponse.data);
+      } catch (error) {
+        console.error('Error fetching regions:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    fetchNewFlag();
+    fetchAllCountries();
+  }, [selectedRegion]);
+
   return (
-    <div className="flag-quiz">
-      <h1>Flag Quiz Game</h1>
-      <p>Current Score: {score}</p>
-      
-      {loading ? (
-        <p>Loading...</p>
-      ) : currentFlag ? (
-        <>
-          <img 
-            src={currentFlag.flag_url} 
-            alt="Guess this flag" 
-            style={{ 
-              maxWidth: '300px', 
-              border: '1px solid #ccc',
-              marginBottom: '20px'
-            }}
-          />
-          <form onSubmit={handleSubmit} style={{ marginTop: '20px' }}>
-            <input
-              type="text"
-              value={userGuess}
-              onChange={(e) => setUserGuess(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="Enter country name"
-              style={{ 
-                padding: '10px',
-                width: '300px',
-                fontSize: '16px',
-                borderRadius: '5px',
-                border: '1px solid #ccc'
-              }}
-              autoFocus
+    <div className="app-container">
+      <nav className="navbar">
+        <div className="nav-brand">Flag Quiz</div>
+        <div className="nav-modes">
+          <div className="dropdown">
+            <button 
+              className="mode-button"
+              onClick={() => setShowDropdown(!showDropdown)}
+            >
+              {selectedRegion === 'all' ? 'All Flags' : selectedRegion}
+              <span className="dropdown-arrow">▼</span>
+            </button>
+            {showDropdown && (
+              <div className="dropdown-menu">
+                <div
+                  className="dropdown-item"
+                  onClick={() => {
+                    setSelectedRegion('all');
+                    setShowDropdown(false);
+                  }}
+                >
+                  All Flags
+                </div>
+                {regions.map(region => (
+                  <div
+                    key={region}
+                    className="dropdown-item"
+                    onClick={() => {
+                      setSelectedRegion(region);
+                      setShowDropdown(false);
+                    }}
+                  >
+                    {region}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </nav>
+
+      <div className="flag-quiz">
+        {loading ? (
+          <p>Loading...</p>
+        ) : currentFlag ? (
+          <>
+            <img 
+              src={currentFlag.flag_url} 
+              alt="Guess this flag" 
             />
-          </form>
-        </>
-      ) : (
-        <p>Error loading flag</p>
-      )}
+            <form onSubmit={handleSubmit}>
+              <input
+                type="text"
+                value={userGuess}
+                onChange={(e) => setUserGuess(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Enter country name"
+                autoFocus
+              />
+            </form>
+          </>
+        ) : (
+          <p>Error loading flag</p>
+        )}
+      </div>
     </div>
   );
 }
