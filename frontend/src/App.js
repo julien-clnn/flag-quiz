@@ -97,7 +97,7 @@ function App() {
   return (
     <div className="app-container">
       <nav className="navbar">
-        <div className="nav-brand">Flag Quiz</div>
+        <div className="nav-brand">&#127758; Flag Quiz</div>
         <div className="nav-modes">
           <div className="dropdown">
             <button 
@@ -137,14 +137,16 @@ function App() {
       </nav>
 
       <div className="flag-quiz">
-        {loading ? (
+      {loading ? (
           <p>Loading...</p>
         ) : currentFlag ? (
           <>
-            <img 
-              src={currentFlag.flag_url} 
-              alt="Guess this flag" 
-            />
+            <div className="flag-container">
+              <img 
+                src={currentFlag.flag_url} 
+                alt="Guess this flag" 
+              />
+            </div>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"

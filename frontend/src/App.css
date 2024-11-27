@@ -101,12 +101,13 @@ body {
 
 .flag-quiz img {
   max-width: 400px;
-  width: 100%;
+  max-height: 250px;
+  width: auto;
   height: auto;
   border-radius: 16px;
-  margin: 30px 0;
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1),
               0 8px 24px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
 }
 
 .flag-quiz form {
@@ -159,4 +160,13 @@ body {
   .flag-quiz input {
     width: calc(100% - 48px);
   }
+}
+
+.flag-container {
+  width: 400px;
+  height: 250px;
+  margin: 30px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

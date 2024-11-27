@@ -9,25 +9,50 @@ CORS(app)
 
 REGIONS = {
     "Europe": [
-        "France", "Germany", "Italy", "United Kingdom", "Spain", "Portugal", "Netherlands",
-        "Belgium", "Switzerland", "Austria", "Sweden", "Norway", "Finland", "Denmark",
-        "Poland", "Ukraine", "Greece", "Romania", "Hungary", "Czech Republic"
+        "Albania", "Andorra", "Austria", "Belarus", "Belgium", "Bosnia and Herzegovina",
+        "Bulgaria", "Croatia", "Cyprus", "Czech Republic", "Denmark", "Estonia",
+        "Finland", "France", "Germany", "Greece", "Hungary", "Iceland", "Ireland",
+        "Italy", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Malta",
+        "Moldova", "Monaco", "Montenegro", "Netherlands", "Norway", "Poland",
+        "Portugal", "Romania", "Russia", "Serbia", "Slovakia", "Slovenia", "Spain",
+        "Sweden", "Switzerland", "Ukraine", "United Kingdom"
     ],
-    "North America": ["United States", "Canada", "Mexico"],
-    "South America": [
-        "Brazil", "Argentina", "Chile", "Colombia", "Peru", "Venezuela", 
-        "Uruguay", "Paraguay", "Bolivia", "Ecuador"
-    ],
+    
     "Asia": [
-        "China", "Japan", "South Korea", "India", "Vietnam", "Thailand", 
-        "Indonesia", "Malaysia", "Philippines", "Singapore"
+        "Afghanistan", "Armenia", "Azerbaijan", "Bahrain", "Bangladesh", "Bhutan",
+        "Brunei", "Cambodia", "China", "Georgia", "India", "Indonesia", "Iran", "Iraq",
+        "Israel", "Japan", "Jordan", "Kazakhstan", "Kuwait", "Kyrgyzstan", "Laos",
+        "Lebanon", "Malaysia", "Maldives", "Mongolia", "Myanmar", "Nepal", "North Korea",
+        "Oman", "Pakistan", "Philippines", "Qatar", "Saudi Arabia", "Singapore",
+        "South Korea", "Sri Lanka", "Syria", "Taiwan", "Tajikistan", "Thailand",
+        "Turkey", "Turkmenistan", "United Arab Emirates", "Uzbekistan", "Vietnam",
+        "Yemen"
     ],
+    
     "Africa": [
-        "South Africa", "Egypt", "Morocco", "Nigeria", "Kenya", "Ethiopia",
-        "Ghana", "Senegal", "Tanzania", "Uganda"
+        "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi",
+        "Cameroon", "Cape Verde", "Central African Republic", "Chad", "Comoros",
+        "Djibouti", "Egypt", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea",
+        "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali",
+        "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger",
+        "Nigeria", "Rwanda", "Senegal", "Sierra Leone", "Somalia", "South Africa",
+        "South Sudan", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia",
+        "Zimbabwe"
     ],
+    
+    "North America": [
+        "Bahamas", "Barbados", "Canada", "Costa Rica", "Cuba", "Dominican Republic",
+        "El Salvador", "Grenada", "Guatemala", "Haiti", "Honduras", "Jamaica",
+        "Mexico", "Nicaragua", "Panama", "United States"
+    ],
+    
+    "South America": [
+        "Argentina", "Bolivia", "Brazil", "Chile", "Colombia", "Ecuador", "Guyana",
+        "Paraguay", "Peru", "Uruguay", "Venezuela"
+    ],
+    
     "Oceania": [
-        "Australia", "New Zealand", "Fiji", "Papua New Guinea"
+        "Australia", "Fiji", "New Zealand", "Papua New Guinea"
     ]
 }
 
