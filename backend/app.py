@@ -1,36 +1,39 @@
-import json
-import os
-import random
 from flask import Flask, jsonify, send_from_directory
 from flask_cors import CORS
+import json
+import random
+import os
 
 app = Flask(__name__)
-CORS(app)  # Permettre les requêtes cross-origin
+CORS(app)
 
-# Charger les métadonnées des drapeaux
+# Load flags data
 try:
     with open('flags/flags_metadata.json', 'r', encoding='utf-8') as f:
         FLAGS = json.load(f)
 except FileNotFoundError:
-    print("Fichier de métadonnées de drapeaux non trouvé. Exécutez d'abord le script de téléchargement.")
+    print("Flags metadata file not found")
     FLAGS = []
 
 @app.route('/flag', methods=['GET'])
 def get_random_flag():
     if not FLAGS:
-        return jsonify({"error": "Aucun drapeau disponible"}), 404
+        return jsonify({"error": "No flags available"}), 404
     
-    # Sélectionner un drapeau au hasard
     flag = random.choice(FLAGS)
+    # Get just the filename from the full path
+    filename = os.path.basename(flag['flag_path'])
     
-    # Renvoyer le chemin complet pour que le navigateur puisse l'afficher
     return jsonify({
         "name": flag['name'],
-        "flag_url": f"http://localhost:5000/flags/{os.path.basename(flag['flag_path'])}"
+        # Send only the filename, not the full path
+        "flag_path": filename
     })
 
-@app.route('/flags/<path:filename>')
+@app.route('/flags/<filename>')
 def serve_flag(filename):
+    # Serve files from the flags directory
+    print(f"Serving flag: {filename}")  # Debug print
     return send_from_directory('flags', filename)
 
 if __name__ == '__main__':
