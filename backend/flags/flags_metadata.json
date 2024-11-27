@@ -1,0 +1,77 @@
+[
+    {
+        "name": "France",
+        "flag_path": "flags/france_flag.png",
+        "flag_code": "fr"
+    },
+    {
+        "name": "United States",
+        "flag_path": "flags/united_states_flag.png",
+        "flag_code": "us"
+    },
+    {
+        "name": "United Kingdom",
+        "flag_path": "flags/united_kingdom_flag.png",
+        "flag_code": "gb"
+    },
+    {
+        "name": "Germany",
+        "flag_path": "flags/germany_flag.png",
+        "flag_code": "de"
+    },
+    {
+        "name": "Italy",
+        "flag_path": "flags/italy_flag.png",
+        "flag_code": "it"
+    },
+    {
+        "name": "Japan",
+        "flag_path": "flags/japan_flag.png",
+        "flag_code": "jp"
+    },
+    {
+        "name": "Canada",
+        "flag_path": "flags/canada_flag.png",
+        "flag_code": "ca"
+    },
+    {
+        "name": "Australia",
+        "flag_path": "flags/australia_flag.png",
+        "flag_code": "au"
+    },
+    {
+        "name": "Brazil",
+        "flag_path": "flags/brazil_flag.png",
+        "flag_code": "br"
+    },
+    {
+        "name": "China",
+        "flag_path": "flags/china_flag.png",
+        "flag_code": "cn"
+    },
+    {
+        "name": "India",
+        "flag_path": "flags/india_flag.png",
+        "flag_code": "in"
+    },
+    {
+        "name": "Russia",
+        "flag_path": "flags/russia_flag.png",
+        "flag_code": "ru"
+    },
+    {
+        "name": "Spain",
+        "flag_path": "flags/spain_flag.png",
+        "flag_code": "es"
+    },
+    {
+        "name": "Mexico",
+        "flag_path": "flags/mexico_flag.png",
+        "flag_code": "mx"
+    },
+    {
+        "name": "South Korea",
+        "flag_path": "flags/south_korea_flag.png",
+        "flag_code": "kr"
+    }
+]

@@ -1,0 +1,16 @@
+# Python
+backend/venv/
+backend/__pycache__/
+*.pyc
+
+# Node
+frontend/node_modules/
+frontend/build/
+frontend/.env
+
+# Divers
+.DS_Store
+*.log
+
+# Flag images (optionnel, selon votre préférence)
+backend/flags/*.png
