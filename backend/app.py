@@ -36,5 +36,11 @@ def serve_flag(filename):
     print(f"Serving flag: {filename}")  # Debug print
     return send_from_directory('flags', filename)
 
+@app.route('/countries', methods=['GET'])
+def get_countries():
+    # Return list of all country names from FLAGS
+    countries = [flag['name'] for flag in FLAGS]
+    return jsonify(countries)
+
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
